@@ -11,7 +11,7 @@ class App extends Component {
         drawHMI(this.refs.theInput);
         console.log('im alive');
     }
-    
+
   render() {
         const myStyle = {
             position: 'absolute',
