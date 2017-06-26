@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './ElemetnHMI.css';
+import logo from '../logo.svg';
 
 class Element extends Component {
 
@@ -7,10 +8,10 @@ class Element extends Component {
         if (this.props.isChange){
 
         }
-    }
+    };
     componentDidMount() {
         // drawHMI(this);
-    }
+    };
     componentDidUpdate() {
     //     this.addEventListener("mousedown", function (e) {
     //         // drawHMI(this, e);
@@ -29,7 +30,7 @@ class Element extends Component {
 
         return (
                 <div className="ElementHMI" onMouseDown={this.props.onMouseDownHandler} style={myStyle}>
-                    <img src="/src/logo.svg" alt=""/>
+                    <img src={logo} className="App-logo" alt="logo" />
                 </div>
         );
     }
