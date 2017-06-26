@@ -11,8 +11,7 @@ class App extends Component {
         drawHMI(this.refs.theInput);
         console.log('im alive');
     }
-
-
+    
   render() {
         const myStyle = {
             position: 'absolute',
@@ -22,6 +21,7 @@ class App extends Component {
             width: '50px',
             backgroundColor: 'Green'
         };
+
     return (
       <div className="App">
         <div className="App-header">
