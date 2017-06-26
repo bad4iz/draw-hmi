@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
+import {Drawer, Navigation} from "react-mdl";
 
 class MainMenu extends Component {
 
     render() {
         return (
-            <div className="mainMenu">
-                тут будет меню
-            </div>
+            <Drawer title="Title">
+                <Navigation>
+                    <a href="#">Link</a>
+                    <a href="#">Link</a>
+                    <a href="#">Link</a>
+                    <a href="#">Link</a>
+                </Navigation>
+            </Drawer>
         );
     }
 }
