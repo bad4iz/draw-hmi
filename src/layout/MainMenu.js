@@ -5,7 +5,7 @@ class MainMenu extends Component {
 
     render() {
         return (
-            <Drawer title="Title">
+            <Drawer title="Меню">
                 <Navigation>
                     <a href="#">Link</a>
                     <a href="#">Link</a>
