@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import drawHMI from './draw';
+import MainMenu from "./component/MainMenu";
 
 class App extends Component {
     componentDidMount() {
@@ -15,8 +16,8 @@ class App extends Component {
   render() {
         const myStyle = {
             position: 'absolute',
-            left: '100px',
-            top: '100px',
+            left: '50%',
+            top: '50%',
             height: '50px',
             width: '50px',
             backgroundColor: 'Green'
@@ -31,6 +32,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save  reload.
         </p>
+          <MainMenu/>
       </div>
     );
   }

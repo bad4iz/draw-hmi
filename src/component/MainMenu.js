@@ -1,3 +1,14 @@
-/**
- * Created by bad4i on 26.06.2017.
- */
+import React, { Component } from 'react';
+
+class MainMenu extends Component {
+
+    render() {
+        return (
+            <div className="mainMenu">
+                тут будет меню
+            </div>
+        );
+    }
+}
+
+export default MainMenu;
