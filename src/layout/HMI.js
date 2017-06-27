@@ -84,10 +84,10 @@ class HMI extends Component {
 
 
     handleElemetnChange(newElement, changes) {
-//   console.log('handleElemetnChange');
-//   const id = newElement.id;
-//   const newElem = this.state.elements.filter()
-//   this.setState({elements: newElem})
+    //  console.log('handleElemetnChange');
+    //  const id = newElement.id;
+    //  const newElem = this.state.elements.filter();
+    //  this.setState({elements: newElem});
     }
 
     componentDidUpdate() {
