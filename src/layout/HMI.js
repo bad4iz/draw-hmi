@@ -56,14 +56,15 @@ class HMI extends Component {
                 y: elementToDrag.offsetTop
             };
 
-
             document.removeEventListener("mouseup", upHandler, true);
             document.removeEventListener("mousemove", moveHandler, true);
 
             handleElementChange(elem);
-
         }
 
+        elementToDrag.ondragstart = function() {
+            return false;
+        };
     }
 
     addElemetnHandler = () => {
