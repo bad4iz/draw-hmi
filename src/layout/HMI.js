@@ -11,7 +11,6 @@ class HMI extends Component {
     };
 
     _updateLocalStorage = () => {
-        console.log('_updateLocalStorage()');
         const elements = JSON.stringify(this.state.elements);
         localStorage.setItem('elements', elements);
     };
@@ -19,9 +18,8 @@ class HMI extends Component {
     mousedownHandler = (event) => {
         if (this.state.isChange) return;
 
-        const handleElemetnChange = this.handleElemetnChange.bind(this);
+        const handleElementChange = this.handleElementChange.bind(this);
 
-        console.log(event.target.id);
         const elementToDrag = event.target;
 
         // координаты мыши в начале перетаскивания.
@@ -30,6 +28,7 @@ class HMI extends Component {
 
         // начальные координаты элемента, который будет перемещаться.
         var origX = elementToDrag.offsetLeft,
+            origId = elementToDrag.id,
             origY = elementToDrag.offsetTop;
 
         // разница между координатами мыши и координатами перетаскиваемого элемента.
@@ -46,22 +45,25 @@ class HMI extends Component {
             // перемещаем элемент с учетом отступа от первоначального клика.
             elementToDrag.style.left = (e.clientX - deltaX) + "px";
             elementToDrag.style.top = (e.clientY - deltaY) + "px";
-            const elem = e.target;
-            handleElemetnChange(elem, {
-                x:  elem.offsetLeft,
-                y: elem.offsetTop
-            })
         }
 
         function upHandler(e) {
             if (!e) e = window.event;
 
+            const elem = {
+                id: elementToDrag.id,
+                x: elementToDrag.offsetLeft,
+                y: elementToDrag.offsetTop
+            };
+
+
             document.removeEventListener("mouseup", upHandler, true);
             document.removeEventListener("mousemove", moveHandler, true);
 
+            handleElementChange(elem);
+
         }
 
-        console.log(startX, startY)
     }
 
     addElemetnHandler = () => {
@@ -82,17 +84,23 @@ class HMI extends Component {
         }
     }
 
+    handleElementChange(newElement) {
 
-    handleElemetnChange(newElement, changes) {
-    //  console.log('handleElemetnChange');
-    //  const id = newElement.id;
-    //  const newElem = this.state.elements.filter();
-    //  this.setState({elements: newElem});
+     let tmpElement = this.state.elements.slice();
+     const newElem = tmpElement.map( item => {
+         return (newElement.id == item.id) ? newElement : item ;
+     });
+    this.setState({elements: newElem});
+
+     // this.setState({elements: newElem});
+
+
     }
 
     componentDidUpdate() {
         this._updateLocalStorage();
-        console.log('componentDidUpdate');
+        console.log( this.state.elements );
+
     }
 
     render() {
