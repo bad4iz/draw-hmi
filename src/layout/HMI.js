@@ -6,34 +6,19 @@ import Element from "./Element";
 class HMI extends Component {
 
     state = {
-        elements: [
-            {
-                id: 50,
-                x: 50,
-                y: 50
-            },
-            {
-                id: 51,
-                x: 100,
-                y: 50
-            },
-            {
-                id: 54,
-                x: 105,
-                y: 500
-            },
-            {
-                id: 56,
-                x: 500,
-                y: 100
-            }],
+        elements: [],
         isChange: false
     };
 
-    mousedownHandler = (event) => {
+    _updateLocalStorage = () => {
+        const elements = JSON.stringify(this.state.elements);
+        localStorage.setItem('elements', elements);
+    };
 
+    mousedownHandler = (event) => {
         if (this.state.isChange) return;
-        console.log(event);
+
+        const handleElementChange = this.handleElementChange.bind(this);
 
         const elementToDrag = event.target;
 
@@ -43,6 +28,7 @@ class HMI extends Component {
 
         // начальные координаты элемента, который будет перемещаться.
         var origX = elementToDrag.offsetLeft,
+            origId = elementToDrag.id,
             origY = elementToDrag.offsetTop;
 
         // разница между координатами мыши и координатами перетаскиваемого элемента.
@@ -64,11 +50,20 @@ class HMI extends Component {
         function upHandler(e) {
             if (!e) e = window.event;
 
+            const elem = {
+                id: elementToDrag.id,
+                x: elementToDrag.offsetLeft,
+                y: elementToDrag.offsetTop
+            };
+
+
             document.removeEventListener("mouseup", upHandler, true);
             document.removeEventListener("mousemove", moveHandler, true);
+
+            handleElementChange(elem);
+
         }
 
-        console.log(startX, startY)
     }
 
     addElemetnHandler = () => {
@@ -79,10 +74,34 @@ class HMI extends Component {
             y: 500
         };
         newElements.push(element);
-
-        this.setState({ elements: newElements });
-        console.log(654465465);
+        this.setState({elements: newElements});
     };
+
+    componentDidMount() {
+        const localElements = JSON.parse(localStorage.getItem('elements'));
+        if (localElements) {
+            this.setState({elements: localElements});
+        }
+    }
+
+    handleElementChange(newElement) {
+
+     let tmpElement = this.state.elements.slice();
+     const newElem = tmpElement.map( item => {
+         return (newElement.id == item.id) ? newElement : item ;
+     });
+    this.setState({elements: newElem});
+
+     // this.setState({elements: newElem});
+
+
+    }
+
+    componentDidUpdate() {
+        this._updateLocalStorage();
+        console.log( this.state.elements );
+
+    }
 
     render() {
         return (
@@ -107,7 +126,7 @@ class HMI extends Component {
                                             onMouseDownHandler={this.mousedownHandler}
                                             isChange={this.state.isChange}
                                             key={element.id}
-                                            stat={element} />
+                                            stat={element}/>
                                     )
                                 })
                             }
@@ -117,6 +136,8 @@ class HMI extends Component {
             </div>
         );
     }
+
+
 }
 
 export default HMI;
