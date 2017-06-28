@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import MainMenu from "./MainMenu";
-import {Content, Header, Layout, Navigation} from "react-mdl";
+import {Checkbox, Content, Header, Layout, Navigation} from "react-mdl";
 import Element from "./Element";
 
 class HMI extends Component {
 
     state = {
         elements: [],
-        isChange: false
+        cannotChange: true
     };
 
     _updateLocalStorage = () => {
@@ -16,7 +16,7 @@ class HMI extends Component {
     };
 
     mousedownHandler = (event) => {
-        if (this.state.isChange) return;
+        if (this.state.cannotChange) return;
 
         const handleElementChange = this.handleElementChange.bind(this);
 
@@ -62,7 +62,7 @@ class HMI extends Component {
             handleElementChange(elem);
         }
 
-        elementToDrag.ondragstart = function() {
+        elementToDrag.ondragstart = function () {
             return false;
         };
     }
@@ -87,22 +87,20 @@ class HMI extends Component {
 
     handleElementChange(newElement) {
 
-     let tmpElement = this.state.elements.slice();
-     const newElem = tmpElement.map( item => {
-         return (newElement.id == item.id) ? newElement : item ;
-     });
-    this.setState({elements: newElem});
-
-     // this.setState({elements: newElem});
-
-
+        let tmpElement = this.state.elements.slice();
+        const newElem = tmpElement.map(item => {
+            return (newElement.id == item.id) ? newElement : item;
+        });
+        this.setState({elements: newElem});
     }
 
     componentDidUpdate() {
         this._updateLocalStorage();
-        console.log( this.state.elements );
+    };
 
-    }
+    handleChange = (event) => {
+        this.setState({cannotChange: !this.state.cannotChange})
+    };
 
     render() {
         return (
@@ -116,7 +114,8 @@ class HMI extends Component {
                             <a href="#4">Link</a>
                         </Navigation>
                     </Header>
-                    <MainMenu addElemetnHandler={this.addElemetnHandler}/>
+                    <MainMenu cannotChange={this.state.cannotChange} inHandleChange={this.handleChange}
+                              addElemetnHandler={this.addElemetnHandler}/>
                     <Content>
                         <div className="page-content">
                             {
@@ -125,7 +124,7 @@ class HMI extends Component {
                                         <Element
                                             ref="theInput"
                                             onMouseDownHandler={this.mousedownHandler}
-                                            isChange={this.state.isChange}
+                                            cannotChange={this.state.cannotChange}
                                             key={element.id}
                                             stat={element}/>
                                     )
