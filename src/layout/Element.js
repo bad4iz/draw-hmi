@@ -29,8 +29,11 @@ class Element extends Component {
         };
 
         return (
-            <img id={id} src={logo} className="App-logo" alt="logo" onMouseDown={this.props.onMouseDownHandler}
-                 style={myStyle}/>
+            <div className="Element">
+                <img id={id} src={logo} className="App-logo" alt="logo" onMouseDown={this.props.onMouseDownHandler}
+                     style={myStyle}/>
+
+            </div>
 
         );
     }
