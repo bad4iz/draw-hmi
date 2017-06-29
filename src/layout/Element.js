@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './ElemetnHMI.css';
 import logo from '../logo.svg';
 import {IconButton, Menu, MenuItem} from "react-mdl";
+import messages from '../messages.json';
 
 class Element extends Component {
 
@@ -10,7 +11,7 @@ class Element extends Component {
         y: this.props.stat.y || 0,
         id: this.props.stat.id  || 0,
         img: this.props.stat.img || logo
-    }
+    };
 
     isChange = () => {
         if (this.props.cannotChange) {
@@ -19,6 +20,7 @@ class Element extends Component {
     };
 
     componentDidMount() {
+        console.log(messages);
         // drawHMI(this);
     };
 
@@ -26,7 +28,7 @@ class Element extends Component {
         //     this.addEventListener("mousedown", function (e) {
         //         // drawHMI(this, e);
         //     });
-    }
+    };
 
     onMouseDownHandler = (event) => {
         this.props.onMouseDownHandler(this.refs.element, event);
@@ -54,10 +56,10 @@ class Element extends Component {
                         </Menu>
                     </div>
                 }
-                <img  src={logo} className="App-logo" alt="logo" />
+                <img  src={this.state.img} className="App-logo" alt="logo" />
             </div>
         );
     }
-}
+};
 
 export default Element;
