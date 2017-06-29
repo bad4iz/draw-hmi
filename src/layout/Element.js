@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import './ElemetnHMI.css';
 import logo from '../logo.svg';
+<<<<<<< HEAD
 import {IconButton, Menu, MenuItem} from "react-mdl";
 import messages from '../messages.json';
+=======
+import MenuElement from "./menuElement";
+>>>>>>> develop
 
 class Element extends Component {
 
@@ -34,8 +38,15 @@ class Element extends Component {
         this.props.onMouseDownHandler(this.refs.element, event);
     };
 
+    setImage = (newImg) => {
+        this.setState({
+            img: newImg
+        });
+        console.log(this.state)
+    }
+
     render() {
-        const {x, y, id} = this.state;
+        const {x, y, id, img} = this.state;
         const myStyle = {
             position: 'absolute',
             left: x,
@@ -46,17 +57,15 @@ class Element extends Component {
             <div id={id} ref="element" className="Element" onMouseDown={this.onMouseDownHandler} style={myStyle}>
                 {
                     !this.props.cannotChange &&
-                    <div style={{right: 0, position: 'absolute', zIndex: 999}}>
-                        <IconButton name="more_vert" id={id+ "demo-menu-lower-left"} />
-                        <Menu target={id+ "demo-menu-lower-left"}>
-                            <MenuItem>Some Action</MenuItem>
-                            <MenuItem>Another Action</MenuItem>
-                            <MenuItem disabled>Disabled Action</MenuItem>
-                            <MenuItem>Yet Another Action</MenuItem>
-                        </Menu>
-                    </div>
+                    <MenuElement id={id}
+                    setImage={this.setImage}
+                    />
                 }
+<<<<<<< HEAD
                 <img  src={this.state.img} className="App-logo" alt="logo" />
+=======
+                <img  src={img} className="App-logo" alt="logo" />
+>>>>>>> develop
             </div>
         );
     }
