@@ -17,7 +17,7 @@ class MainMenu extends Component {
         return (
             <Drawer title="Меню">
 
-                <Button onClick={this.addElement}  raised colored>Добавить</Button>
+                <Button onClick={this.addElement} raised colored>Добавить</Button>
                 <Checkbox label="разрешить изменения" ripple checked={!this.props.cannotChange} onChange={this.handleChange} />
 
                 <Navigation>
