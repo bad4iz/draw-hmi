@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
 import './ElemetnHMI.css';
 import logo from '../logo.svg';
-<<<<<<< HEAD
-import {IconButton, Menu, MenuItem} from "react-mdl";
-import messages from '../messages.json';
-=======
+
 import MenuElement from "./menuElement";
->>>>>>> develop
 
 class Element extends Component {
 
@@ -24,7 +20,6 @@ class Element extends Component {
     };
 
     componentDidMount() {
-        console.log(messages);
         // drawHMI(this);
     };
 
@@ -61,11 +56,8 @@ class Element extends Component {
                     setImage={this.setImage}
                     />
                 }
-<<<<<<< HEAD
-                <img  src={this.state.img} className="App-logo" alt="logo" />
-=======
+
                 <img  src={img} className="App-logo" alt="logo" />
->>>>>>> develop
             </div>
         );
     }
