@@ -7,7 +7,7 @@ class HMI extends Component {
 
     state = {
         elements: [],
-        cannotChange: true
+        cannotChange: false
     };
 
     _updateLocalStorage = () => {
@@ -15,12 +15,10 @@ class HMI extends Component {
         localStorage.setItem('elements', elements);
     };
 
-    mousedownHandler = (event) => {
+    mousedownHandler = (elementToDrag, event) => {
         if (this.state.cannotChange) return;
 
         const handleElementChange = this.handleElementChange.bind(this);
-
-        const elementToDrag = event.target;
 
         // координаты мыши в начале перетаскивания.
         var startX = event.clientX,
@@ -53,7 +51,8 @@ class HMI extends Component {
             const elem = {
                 id: elementToDrag.id,
                 x: elementToDrag.offsetLeft,
-                y: elementToDrag.offsetTop
+                y: elementToDrag.offsetTop,
+                img: elementToDrag.querySelector('img').src
             };
 
             document.removeEventListener("mouseup", upHandler, true);
