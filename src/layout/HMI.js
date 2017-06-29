@@ -51,7 +51,8 @@ class HMI extends Component {
             const elem = {
                 id: elementToDrag.id,
                 x: elementToDrag.offsetLeft,
-                y: elementToDrag.offsetTop
+                y: elementToDrag.offsetTop,
+                img: elementToDrag.querySelector('img').src
             };
 
             document.removeEventListener("mouseup", upHandler, true);

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './ElemetnHMI.css';
 import logo from '../logo.svg';
+
 import MenuElement from "./menuElement";
 
 class Element extends Component {
@@ -10,7 +11,7 @@ class Element extends Component {
         y: this.props.stat.y || 0,
         id: this.props.stat.id  || 0,
         img: this.props.stat.img || logo
-    }
+    };
 
     isChange = () => {
         if (this.props.cannotChange) {
@@ -26,7 +27,7 @@ class Element extends Component {
         //     this.addEventListener("mousedown", function (e) {
         //         // drawHMI(this, e);
         //     });
-    }
+    };
 
     onMouseDownHandler = (event) => {
         this.props.onMouseDownHandler(this.refs.element, event);
@@ -55,10 +56,11 @@ class Element extends Component {
                     setImage={this.setImage}
                     />
                 }
+
                 <img  src={img} className="App-logo" alt="logo" />
             </div>
         );
     }
-}
+};
 
 export default Element;
