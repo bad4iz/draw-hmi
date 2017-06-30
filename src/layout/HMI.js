@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import MainMenu from "./MainMenu";
-import {Content, Header, Layout, Navigation} from "react-mdl";
 import Element from "./Element";
 import AppBar from "./AppBar";
 import AddIcon from 'material-ui-icons/Add';

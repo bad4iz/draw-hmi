@@ -4,7 +4,7 @@ import images from '../component/images.json';
 import {SelectField, Option} from 'react-mdl-selectfield';
 
 class menuElement extends Component {
-    
+
     handleSelected = (key) => {
         const newImage = images.filter(item => {
             return item.id == key;
