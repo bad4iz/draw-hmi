@@ -3,6 +3,7 @@ import './ElemetnHMI.css';
 import logo from '../logo.svg';
 
 import MenuElement from "./menuElement";
+import SimpleMenu from "./SimpleMenu";
 
 class Element extends Component {
 
@@ -42,8 +43,8 @@ class Element extends Component {
         const stateImg = this.state.img.substring(this.state.img.indexOf('img'));
         const prevStateImg = prevState.img.substring(prevState.img.indexOf('img'));
 
-        if(stateImg !== prevStateImg) {
-           this.props.onChangeHandler(this.refs.element);
+        if (stateImg !== prevStateImg) {
+            this.props.onChangeHandler(this.refs.element);
             console.log('componentDidUpdate');
         }
         // в prevProps содержится объект с предыдущими параметрами
@@ -63,11 +64,14 @@ class Element extends Component {
             <div id={id} ref="element" className="Element" onMouseDown={this.onMouseDownHandler} style={myStyle}>
                 {
                     this.props.cannotChange &&
-                    <MenuElement
-                        id={id}
-                        imgUrl={img}
-                        setImage={this.setImage}
-                    />
+                    <div>
+                        <MenuElement
+                            id={id}
+                            imgUrl={img}
+                            setImage={this.setImage}
+                        />
+                        <SimpleMenu/>
+                    </div>
                 }
 
                 <img src={img} className="App-logo" alt="logo"/>
