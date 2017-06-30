@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import {Button, Checkbox, Drawer, Navigation} from "react-mdl";
+import {Checkbox, Drawer, Navigation} from "react-mdl";
+
+// material-ui
+import Button from 'material-ui/Button';
+
 
 class MainMenu extends Component {
 
