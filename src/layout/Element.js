@@ -65,11 +65,11 @@ class Element extends Component {
                 {
                     this.props.cannotChange &&
                     <div>
-                        <MenuElement
-                            id={id}
-                            imgUrl={img}
-                            setImage={this.setImage}
-                        />
+                        {/*<MenuElement*/}
+                            {/*id={id}*/}
+                            {/*imgUrl={img}*/}
+                            {/*setImage={this.setImage}*/}
+                        {/*/>*/}
                         <SimpleMenu/>
                     </div>
                 }
