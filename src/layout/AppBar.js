@@ -12,6 +12,7 @@ import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import AddIcon from 'material-ui-icons/Add';
+import Switches from "./Switches";
 
 
 const styleSheet = createStyleSheet('ButtonAppBar', {
@@ -30,17 +31,13 @@ function ButtonAppBar(props) {
     const addElemetnHandler = props.addElemetnHandler;
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="static" color="default">
                 <Toolbar>
-                    <IconButton color="contrast" aria-label="Menu">
+                    <IconButton color="" aria-label="Menu">
                         <MenuIcon />
                     </IconButton>
                     <Typography type="title" color="inherit" className={classes.flex}>Title</Typography>
-                    <Button fab color="contrast" onClick={addElemetnHandler} >
-                        <AddIcon />
-                    </Button>
-                   
-
+                <Switches/>
                 </Toolbar>
             </AppBar>
         </div>
