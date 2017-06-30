@@ -7,9 +7,7 @@ import Button from 'material-ui/Button';
 
 class MainMenu extends Component {
 
-    addElement = () => {
-        this.props.addElemetnHandler();
-    };
+
 
     handleChange = (e) => {
 
@@ -21,7 +19,6 @@ class MainMenu extends Component {
         return (
             <Drawer title="Меню">
 
-                <Button onClick={this.addElement} raised colored>Добавить</Button>
                 <Checkbox label="разрешить изменения" ripple checked={!this.props.cannotChange} onChange={this.handleChange} />
 
                 <Navigation>

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import MainMenu from "./MainMenu";
 import {Content, Header, Layout, Navigation} from "react-mdl";
 import Element from "./Element";
+import AppBar from "./AppBar";
 
 class HMI extends Component {
 
@@ -111,14 +112,10 @@ class HMI extends Component {
     render() {
         return (
             <div className="HMI">
+                <AppBar   addElemetnHandler={this.addElemetnHandler}/>
                 <Layout>
                     <Header title="Меню">
-                        <Navigation>
-                            <a href="#1">Link</a>
-                            <a href="#2">Link</a>
-                            <a href="#3">Link</a>
-                            <a href="#4">Link</a>
-                        </Navigation>
+
                     </Header>
                     <MainMenu cannotChange={this.state.cannotChange} inHandleChange={this.handleChange}
                               addElemetnHandler={this.addElemetnHandler}/>
