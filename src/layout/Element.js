@@ -9,7 +9,7 @@ class Element extends Component {
     state = {
         x: this.props.stat.x || 0,
         y: this.props.stat.y || 0,
-        id: this.props.stat.id  || 0,
+        id: this.props.stat.id || 0,
         img: this.props.stat.img || logo
     };
 
@@ -24,9 +24,6 @@ class Element extends Component {
     };
 
     componentDidUpdate() {
-        //     this.addEventListener("mousedown", function (e) {
-        //         // drawHMI(this, e);
-        //     });
     };
 
     onMouseDownHandler = (event) => {
@@ -37,7 +34,21 @@ class Element extends Component {
         this.setState({
             img: newImg
         });
-        console.log(this.state)
+        // console.log(this.state);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+
+        const stateImg = this.state.img.substring(this.state.img.indexOf('img'));
+        const prevStateImg = prevState.img.substring(prevState.img.indexOf('img'));
+
+        if(stateImg !== prevStateImg) {
+           this.props.onChangeHandler(this.refs.element);
+            console.log('componentDidUpdate');
+        }
+        // в prevProps содержится объект с предыдущими параметрами
+        // в prevState содержится объект с состоянием до изменения
+        // измененные параметры и состояние могут быть получены через this.props и this.state
     }
 
     render() {
@@ -52,15 +63,18 @@ class Element extends Component {
             <div id={id} ref="element" className="Element" onMouseDown={this.onMouseDownHandler} style={myStyle}>
                 {
                     !this.props.cannotChange &&
-                    <MenuElement id={id}
-                    setImage={this.setImage}
+                    <MenuElement
+                        id={id}
+                        imgUrl={img}
+                        setImage={this.setImage}
                     />
                 }
 
-                <img  src={img} className="App-logo" alt="logo" />
+                <img src={img} className="App-logo" alt="logo"/>
             </div>
         );
     }
-};
+}
+;
 
 export default Element;
