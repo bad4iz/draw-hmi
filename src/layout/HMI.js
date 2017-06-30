@@ -100,8 +100,9 @@ class HMI extends Component {
         this._updateLocalStorage();
     };
 
-    handleChange = (event) => {
-        this.setState({cannotChange: !this.state.cannotChange})
+    allowEditingHandler = (event) => {
+        console.log(event);
+        this.setState({cannotChange: event})
     };
 
     onChangeHandler = (item) => {
@@ -114,13 +115,16 @@ class HMI extends Component {
     render() {
         return (
             <div className="HMI">
-                <AppBar   addElemetnHandler={this.addElemetnHandler}/>
+                <AppBar
+                    allowEditingHandler={this.allowEditingHandler}
+                    cannotChange={this.state.cannotChange}
+                />
                 <Layout>
                     <Header title="Меню">
 
                     </Header>
-                    <MainMenu cannotChange={this.state.cannotChange} inHandleChange={this.handleChange}
-                              addElemetnHandler={this.addElemetnHandler}/>
+                    <MainMenu
+                        />
                     <Content>
                         <div className="page-content">
                             {
@@ -138,8 +142,14 @@ class HMI extends Component {
                                 })
                             }
                         </div>
-                        { !this.state.cannotChange &&
-                            <Button fab color="contrast" onClick={this.addElemetnHandler} raised style={{position: 'fixed', bottom: 50, right: 50}}>
+                        { this.state.cannotChange &&
+                            <Button
+                                fab
+                                raised
+                                color='contrast'
+                                style={{position: 'fixed', bottom: 50, right: 50}}
+                                onClick={this.addElemetnHandler}
+                            >
                                 <AddIcon />
                             </Button>
                         }

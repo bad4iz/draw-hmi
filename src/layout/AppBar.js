@@ -1,7 +1,5 @@
 // @flow
-
 import React from 'react';
-
 
 import PropTypes from 'prop-types';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
@@ -14,7 +12,6 @@ import MenuIcon from 'material-ui-icons/Menu';
 import AddIcon from 'material-ui-icons/Add';
 import Switches from "./Switches";
 
-
 const styleSheet = createStyleSheet('ButtonAppBar', {
     root: {
         width: '100%',
@@ -24,20 +21,20 @@ const styleSheet = createStyleSheet('ButtonAppBar', {
     },
 });
 
-
-
 function ButtonAppBar(props) {
-    const classes = props.classes;
-    const addElemetnHandler = props.addElemetnHandler;
+    const {classes, allowEditingHandler, cannotChange} = props;
     return (
         <div className={classes.root}>
             <AppBar position="static" color="default">
                 <Toolbar>
-                    <IconButton color="" aria-label="Menu">
+                    <IconButton color="default" aria-label="Menu">
                         <MenuIcon />
                     </IconButton>
                     <Typography type="title" color="inherit" className={classes.flex}>Title</Typography>
-                <Switches/>
+                <Switches
+                    addElemetnHandler={allowEditingHandler}
+                    cannotChange={cannotChange}
+                />
                 </Toolbar>
             </AppBar>
         </div>

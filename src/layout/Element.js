@@ -62,7 +62,7 @@ class Element extends Component {
         return (
             <div id={id} ref="element" className="Element" onMouseDown={this.onMouseDownHandler} style={myStyle}>
                 {
-                    !this.props.cannotChange &&
+                    this.props.cannotChange &&
                     <MenuElement
                         id={id}
                         imgUrl={img}
