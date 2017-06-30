@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import Switch from 'material-ui/Switch';
+import { LabelSwitch } from 'material-ui/Switch';
 
 export default class Switches extends Component {
 
@@ -12,7 +13,7 @@ export default class Switches extends Component {
     render() {
         return (
             <div>
-                <Switch
+                <LabelSwitch
                     checked={this.props.cannotChange}
                     onChange={this.onChangeHandler}
                     aria-label="checkedA"
