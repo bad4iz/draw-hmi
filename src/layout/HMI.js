@@ -3,6 +3,8 @@ import MainMenu from "./MainMenu";
 import {Content, Header, Layout, Navigation} from "react-mdl";
 import Element from "./Element";
 import AppBar from "./AppBar";
+import AddIcon from 'material-ui-icons/Add';
+import {Button} from "material-ui";
 
 class HMI extends Component {
 
@@ -136,6 +138,11 @@ class HMI extends Component {
                                 })
                             }
                         </div>
+                        { !this.state.cannotChange &&
+                            <Button fab color="contrast" onClick={this.addElemetnHandler} raised style={{position: 'fixed', bottom: 50, right: 50}}>
+                                <AddIcon />
+                            </Button>
+                        }
                     </Content>
                 </Layout>
             </div>
