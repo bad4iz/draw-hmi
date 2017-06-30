@@ -119,13 +119,6 @@ class HMI extends Component {
                     allowEditingHandler={this.allowEditingHandler}
                     cannotChange={this.state.cannotChange}
                 />
-                <Layout>
-                    <Header title="Меню">
-
-                    </Header>
-                    <MainMenu
-                        />
-                    <Content>
                         <div className="page-content">
                             {
                                 this.state.elements.map(element => {
@@ -153,8 +146,6 @@ class HMI extends Component {
                                 <AddIcon />
                             </Button>
                         }
-                    </Content>
-                </Layout>
             </div>
         );
     }
