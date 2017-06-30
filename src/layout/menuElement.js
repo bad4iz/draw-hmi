@@ -5,21 +5,38 @@ import { SelectField, Option } from 'react-mdl-selectfield';
 
 class menuElement extends Component {
 
-    handleSelected = (event, key, payload) => {
-        console.log(event);
-        console.log(key);
+    state={
+
+    }
+
+    getElement = () => {
+        const newElement = images.filter(item => {
+            return item.url == this.props.imgUrl;
+        });
+        return newElement;
+    };
+    componentWillMount() {
+        // this.props.imgUrl.substring(this.props.imgUrl.indexOf('img'));
+        // this.setState
+        // urlImg: this.props.imgUrl.substring(this.props.imgUrl.indexOf('img')),
+        //     element: images.filter(item => {
+        //     return item.url == this.props.imgUrl.substring(this.props.imgUrl.indexOf('img'));
+        // })
+    }
+    handleSelected = (key) => {
         const newImage = images.filter(item => {
-            return item.id == event;
+            return item.id == key;
         });
         this.props.setImage(newImage[0].url)
     }
+
     render() {
-    console.log('render');
       return (
             <div style={{right: 0, position: 'absolute', zIndex: 9}}>
                 <IconButton name="more_vert" id={this.props.id + "demo-menu-lower-left"} />
                 <Menu target={this.props.id + "demo-menu-lower-left"} style={{ position: 'relative', height: '200px', width: '350px'}}>
-                    <SelectField onChange={ this.handleSelected } label={'Выбрать изображение'} value={'sdfd45asd'}>
+                    <SelectField onChange={ this.handleSelected } label={'Выбрать изображение'} value={2} >
+
                         {images.map(user =>
                             <Option key={user.id} value={user.id}>
                                 {` ${user.name}` }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import MainMenu from "./MainMenu";
-import {Checkbox, Content, Header, Layout, Navigation} from "react-mdl";
+import {Content, Header, Layout, Navigation} from "react-mdl";
 import Element from "./Element";
 
 class HMI extends Component {
@@ -38,6 +38,7 @@ class HMI extends Component {
         document.addEventListener("mouseup", upHandler, true);
 
         function moveHandler(e) {
+
             if (!e) e = window.event;
 
             // перемещаем элемент с учетом отступа от первоначального клика.
@@ -48,17 +49,10 @@ class HMI extends Component {
         function upHandler(e) {
             if (!e) e = window.event;
 
-            const elem = {
-                id: elementToDrag.id,
-                x: elementToDrag.offsetLeft,
-                y: elementToDrag.offsetTop,
-                img: elementToDrag.querySelector('img').src
-            };
-
             document.removeEventListener("mouseup", upHandler, true);
             document.removeEventListener("mousemove", moveHandler, true);
 
-            handleElementChange(elem);
+            handleElementChange(elementToDrag);
         }
 
         elementToDrag.ondragstart = function () {
@@ -84,11 +78,17 @@ class HMI extends Component {
         }
     }
 
-    handleElementChange(newElement) {
+    handleElementChange = (newElement) => {
+        const newElementLocal = {
+            id: newElement.id,
+            x: newElement.offsetLeft,
+            y: newElement.offsetTop,
+            img: newElement.querySelector('img').src
+        };
 
         let tmpElement = this.state.elements.slice();
         const newElem = tmpElement.map(item => {
-            return (newElement.id == item.id) ? newElement : item;
+            return (newElementLocal.id == item.id) ? newElementLocal : item;
         });
         this.setState({elements: newElem});
     }
@@ -100,6 +100,13 @@ class HMI extends Component {
     handleChange = (event) => {
         this.setState({cannotChange: !this.state.cannotChange})
     };
+
+    onChangeHandler = (item) => {
+        console.log('item');
+        console.log(item.querySelector('img').src);
+
+        this.handleElementChange(item);
+    }
 
     render() {
         return (
@@ -125,7 +132,9 @@ class HMI extends Component {
                                             onMouseDownHandler={this.mousedownHandler}
                                             cannotChange={this.state.cannotChange}
                                             key={element.id}
-                                            stat={element}/>
+                                            stat={element}
+                                            onChangeHandler={this.onChangeHandler}
+                                        />
                                     )
                                 })
                             }
