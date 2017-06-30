@@ -3,28 +3,8 @@ import {IconButton, Menu, MenuItem, Textfield} from "react-mdl";
 import images from '../component/images.json';
 import {SelectField, Option} from 'react-mdl-selectfield';
 
-import Button from 'material-ui/Button';
-
 class menuElement extends Component {
-
-    state = {}
-
-    getElement = () => {
-        const newElement = images.filter(item => {
-            return item.url == this.props.imgUrl;
-        });
-        return newElement;
-    };
-
-    componentWillMount() {
-        // this.props.imgUrl.substring(this.props.imgUrl.indexOf('img'));
-        // this.setState
-        // urlImg: this.props.imgUrl.substring(this.props.imgUrl.indexOf('img')),
-        //     element: images.filter(item => {
-        //     return item.url == this.props.imgUrl.substring(this.props.imgUrl.indexOf('img'));
-        // })
-    }
-
+    
     handleSelected = (key) => {
         const newImage = images.filter(item => {
             return item.id == key;
