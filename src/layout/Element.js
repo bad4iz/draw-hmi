@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import './ElemetnHMI.css';
 import logo from '../logo.svg';
 
+import MenuElement from "./menuElement2";
 import MenuElement from "./menuElement";
-import SimpleMenu from "./SimpleMenu";
 
 class Element extends Component {
 
@@ -65,12 +65,7 @@ class Element extends Component {
                 {
                     this.props.cannotChange &&
                     <div>
-                        {/*<MenuElement*/}
-                            {/*id={id}*/}
-                            {/*imgUrl={img}*/}
-                            {/*setImage={this.setImage}*/}
-                        {/*/>*/}
-                        <SimpleMenu/>
+                        <MenuElement/>
                     </div>
                 }
 
