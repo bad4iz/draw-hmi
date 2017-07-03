@@ -7,12 +7,8 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
-import 'react-mdl/extra/material.css';
-import 'react-mdl/extra/material.js';
-
 ReactDOM.render(
     <MuiThemeProvider>
-
         <App />
     </MuiThemeProvider>
     , document.getElementById('root'));

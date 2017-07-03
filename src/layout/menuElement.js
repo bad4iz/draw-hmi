@@ -1,16 +1,27 @@
 // @flow weak
 
 import React, { Component } from 'react';
-import Button from 'material-ui/Button';
 import Menu, { MenuItem } from 'material-ui/Menu';
-import MenuIcon from 'material-ui-icons/Menu';
+import DeleteForeverIcon from 'material-ui-icons/DeleteForever';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
+// import SelectField from 'material-ui/SelectField';
+
+import images from '../component/images.json';
+
 class MenuElement extends Component {
     state = {
         anchorEl: undefined,
         open: false,
     };
+
+    handleSelected = (key) => {
+        const newImage = images.filter(item => {
+            return item.id == key;
+        });
+        this.props.setImage(newImage[0].url)
+    }
+
 
     button = undefined;
 
@@ -38,7 +49,26 @@ class MenuElement extends Component {
                 >
                     <MenuItem onClick={this.handleRequestClose}>Profile</MenuItem>
                     <MenuItem onClick={this.handleRequestClose}>My account</MenuItem>
+                    {/*<SelectField onChange={ this.handleSelected } label={'Выбрать изображение'} value={2}>*/}
+
+                        {/*{images.map(user =>*/}
+                            {/*<Option key={user.id} value={user.id}>*/}
+                                {/*{` ${user.name}` }*/}
+                            {/*</Option>*/}
+                        {/*)}*/}
+                    {/*</SelectField>*/}
                     <MenuItem onClick={this.handleRequestClose}>Logout</MenuItem>
+                    <MenuItem >
+                        <DeleteForeverIcon/>
+                    </MenuItem>
+
+                    {/*<SelectField>*/}
+                        {/*<MenuItem value={1} primaryText="Custom width" />*/}
+                        {/*<MenuItem value={2} primaryText="Every Night" />*/}
+                        {/*<MenuItem value={3} primaryText="Weeknights" />*/}
+                        {/*<MenuItem value={4} primaryText="Weekends" />*/}
+                        {/*<MenuItem value={5} primaryText="Weekly" />*/}
+                    {/*</SelectField>*/}
                 </Menu>
             </div>
         );
