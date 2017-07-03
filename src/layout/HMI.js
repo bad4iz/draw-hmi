@@ -137,7 +137,7 @@ class HMI extends Component {
                             <Button
                                 fab
                                 raised
-                                color='contrast'
+                                color='primary'
                                 style={{position: 'fixed', bottom: 50, right: 50}}
                                 onClick={this.addElemetnHandler}
                             >
