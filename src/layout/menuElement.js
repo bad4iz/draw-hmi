@@ -6,7 +6,7 @@ import Menu, { MenuItem } from 'material-ui/Menu';
 import MenuIcon from 'material-ui-icons/Menu';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
-class SimpleMenu extends Component {
+class MenuElement extends Component {
     state = {
         anchorEl: undefined,
         open: false,
@@ -44,4 +44,4 @@ class SimpleMenu extends Component {
     }
 }
 
-export default SimpleMenu;
+export default MenuElement;
