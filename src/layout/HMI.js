@@ -8,7 +8,7 @@ class HMI extends Component {
 
     state = {
         elements: [],
-        cannotChange: false
+        cannotChange: true
     };
 
     _updateLocalStorage = () => {

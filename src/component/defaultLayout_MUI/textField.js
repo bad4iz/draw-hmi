@@ -1,3 +1,45 @@
-/**
- * Created by bad4i on 03.07.2017.
- */
+// @flow
+
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
+import TextField from 'material-ui/TextField';
+
+const styleSheet = createStyleSheet('TextFields', theme => ({
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+    },
+    input: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 200,
+    },
+}));
+
+class TextFields extends Component {
+     render() {
+
+        const { classes, helperText, label, placeholder } = this.props;
+
+        return (
+            <div className={classes.container}>
+                <TextField
+                    id="placeholder"
+                    label={label}
+                    className={classes.input}
+                    type="text"
+                    InputProps={{ placeholder}}
+                    helperText={helperText}
+                    marginForm
+                />
+            </div>
+        );
+    }
+}
+
+TextFields.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styleSheet)(TextFields);

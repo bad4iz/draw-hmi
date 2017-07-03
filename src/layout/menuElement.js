@@ -1,5 +1,4 @@
 // @flow weak
-
 import React, { Component } from 'react';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import DeleteForeverIcon from 'material-ui-icons/DeleteForever';
@@ -7,7 +6,9 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 // import SelectField from 'material-ui/SelectField';
 
+// components my
 import images from '../component/images.json';
+import TextField from '../component/defaultLayout_MUI/textField';
 
 class MenuElement extends Component {
     state = {
@@ -47,7 +48,10 @@ class MenuElement extends Component {
                     open={this.state.open}
                     onRequestClose={this.handleRequestClose}
                 >
-                    <MenuItem onClick={this.handleRequestClose}>Profile</MenuItem>
+                    <TextField
+                        label="название"
+                        placeholder='Введите название элемента'
+                    />
                     <MenuItem onClick={this.handleRequestClose}>My account</MenuItem>
                     {/*<SelectField onChange={ this.handleSelected } label={'Выбрать изображение'} value={2}>*/}
 
@@ -69,6 +73,7 @@ class MenuElement extends Component {
                         {/*<MenuItem value={4} primaryText="Weekends" />*/}
                         {/*<MenuItem value={5} primaryText="Weekly" />*/}
                     {/*</SelectField>*/}
+
                 </Menu>
             </div>
         );
