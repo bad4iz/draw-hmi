@@ -26,6 +26,7 @@ class MenuElement extends Component {
         return (
             <div>
                 <IconButton
+                    style={{right: '-40px', top: '-40px', position: 'absolute', zIndex: 9}}
                     aria-owns="simple-menu" aria-haspopup="true" onClick={this.handleClick}>
                    <MoreVertIcon />
                 </IconButton >

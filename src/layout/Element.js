@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './ElemetnHMI.css';
 import logo from '../logo.svg';
 
-import MenuElement from "./menuElement2";
 import MenuElement from "./menuElement";
 
 class Element extends Component {
