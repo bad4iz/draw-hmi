@@ -17,7 +17,7 @@ class HMI extends Component {
     };
 
     mousedownHandler = (elementToDrag, event) => {
-        if (this.state.cannotChange) return;
+        if (!this.state.cannotChange) return;
 
         const handleElementChange = this.handleElementChange.bind(this);
 

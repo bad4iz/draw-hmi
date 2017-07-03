@@ -36,7 +36,7 @@ class Element extends Component {
             img: newImg
         });
         // console.log(this.state);
-    }
+    };
 
     componentDidUpdate(prevProps, prevState) {
 
