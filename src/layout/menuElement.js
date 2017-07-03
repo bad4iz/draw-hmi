@@ -1,44 +1,47 @@
-import React, {Component} from 'react';
-import {IconButton, Menu, MenuItem, Textfield} from "react-mdl";
-import images from '../component/images.json';
-import {SelectField, Option} from 'react-mdl-selectfield';
+// @flow weak
 
-class menuElement extends Component {
+import React, { Component } from 'react';
+import Button from 'material-ui/Button';
+import Menu, { MenuItem } from 'material-ui/Menu';
+import MenuIcon from 'material-ui-icons/Menu';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui-icons/MoreVert';
+class SimpleMenu extends Component {
+    state = {
+        anchorEl: undefined,
+        open: false,
+    };
 
-    handleSelected = (key) => {
-        const newImage = images.filter(item => {
-            return item.id == key;
-        });
-        this.props.setImage(newImage[0].url)
-    }
+    button = undefined;
+
+    handleClick = event => {
+        this.setState({ open: true, anchorEl: event.currentTarget });
+    };
+
+    handleRequestClose = () => {
+        this.setState({ open: false });
+    };
 
     render() {
         return (
-            <div style={{right: 0, position: 'absolute', zIndex: 9}}>
-                <IconButton name="more_vert" id={this.props.id + "demo-menu-lower-left"}/>
-                <Menu target={this.props.id + "demo-menu-lower-left"}
-                      style={{position: 'relative', height: '200px', width: '350px'}}>
-                    <div>
-                        <Textfield
-                            onChange={() => {}}
-                            label="Text..."
-                            style={{width: '200px'}}
-                        />
-
-                    </div>
-                    <SelectField onChange={ this.handleSelected } label={'Выбрать изображение'} value={2}>
-
-                        {images.map(user =>
-                            <Option key={user.id} value={user.id}>
-                                {` ${user.name}` }
-                            </Option>
-                        )}
-                    </SelectField>
-                    <MenuItem>Yet Another Action</MenuItem>
+            <div>
+                <IconButton
+                    aria-owns="simple-menu" aria-haspopup="true" onClick={this.handleClick}>
+                   <MoreVertIcon />
+                </IconButton >
+                <Menu
+                    id="simple-menu"
+                    anchorEl={this.state.anchorEl}
+                    open={this.state.open}
+                    onRequestClose={this.handleRequestClose}
+                >
+                    <MenuItem onClick={this.handleRequestClose}>Profile</MenuItem>
+                    <MenuItem onClick={this.handleRequestClose}>My account</MenuItem>
+                    <MenuItem onClick={this.handleRequestClose}>Logout</MenuItem>
                 </Menu>
             </div>
         );
     }
 }
 
-export default menuElement;
+export default SimpleMenu;
