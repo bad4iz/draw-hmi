@@ -33,9 +33,7 @@ class MenuElement extends Component {
     handleRequestClose = () => {
         this.setState({ open: false });
     };
-    handleChange = (val) => {
-        console.log(val);
-    }
+
     render() {
         return (
             <div>
@@ -53,7 +51,6 @@ class MenuElement extends Component {
                     <TextField
                         label="название"
                         placeholder='Введите название элемента'
-                        handleChange={this.handleChange}
                     />
                     <MenuItem onClick={this.handleRequestClose}>My account</MenuItem>
                     {/*<SelectField onChange={ this.handleSelected } label={'Выбрать изображение'} value={2}>*/}
