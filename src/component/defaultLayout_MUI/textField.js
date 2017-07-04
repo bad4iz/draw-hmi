@@ -18,6 +18,11 @@ const styleSheet = createStyleSheet('TextFields', theme => ({
 }));
 
 class TextFields extends Component {
+
+    handleChange = (event) => {
+        this.props.handleChange(event.target.value)
+    }
+
      render() {
 
         const { classes, helperText, label, placeholder } = this.props;
@@ -29,9 +34,11 @@ class TextFields extends Component {
                     label={label}
                     className={classes.input}
                     type="text"
-                    InputProps={{ placeholder}}
+                    InputProps={{ placeholder }}
                     helperText={helperText}
                     marginForm
+
+                    onChange={this.handleChange}
                 />
             </div>
         );

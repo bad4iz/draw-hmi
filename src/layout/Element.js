@@ -67,12 +67,14 @@ class Element extends Component {
                         <MenuElement/>
                     </div>
                 }
-
+                {logo}
+                {/*<object type="image/svg+xml" data={logo}>*/}
+                    {/*Kiwi Logo fgs*/}
+                {/*</object>*/}
                 <img src={img} className="App-logo" alt="logo"/>
             </div>
         );
     }
 }
-;
 
 export default Element;
