@@ -4,6 +4,8 @@ import AppBar from "./AppBar";
 import AddIcon from 'material-ui-icons/Add';
 import {Button} from "material-ui";
 
+import Transition from 'react-motion-ui-pack';
+
 class HMI extends Component {
 
     state = {
@@ -134,6 +136,21 @@ class HMI extends Component {
                             }
                         </div>
                         { this.state.cannotChange &&
+                            <div>
+                                <Transition
+                                    component={false}
+                                    measure={false}
+                                    enter={{
+                                        opacity: 1,
+                                        scale: 1,
+                                        rotate: 0
+                                    }}
+                                    leave={{
+                                        opacity: 0,
+                                        scale: 0,
+                                        rotate: 360
+                                    }}
+                                >
                             <Button
                                 fab
                                 raised
@@ -143,6 +160,8 @@ class HMI extends Component {
                             >
                                 <AddIcon />
                             </Button>
+                                </Transition>
+                            </div>
                         }
             </div>
         );
