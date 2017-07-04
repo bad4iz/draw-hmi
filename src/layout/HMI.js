@@ -1,13 +1,16 @@
 import React, {Component} from 'react';
-import MainMenu from "./MainMenu";
-import {Checkbox, Content, Header, Layout, Navigation} from "react-mdl";
 import Element from "./Element";
+import AppBar from "./AppBar";
+import AddIcon from 'material-ui-icons/Add';
+import {Button} from "material-ui";
+
+import Transition from 'react-motion-ui-pack';
 
 class HMI extends Component {
 
     state = {
         elements: [],
-        cannotChange: false
+        cannotChange: true
     };
 
     _updateLocalStorage = () => {
@@ -16,7 +19,7 @@ class HMI extends Component {
     };
 
     mousedownHandler = (elementToDrag, event) => {
-        if (this.state.cannotChange) return;
+        if (!this.state.cannotChange) return;
 
         const handleElementChange = this.handleElementChange.bind(this);
 
@@ -38,6 +41,7 @@ class HMI extends Component {
         document.addEventListener("mouseup", upHandler, true);
 
         function moveHandler(e) {
+
             if (!e) e = window.event;
 
             // перемещаем элемент с учетом отступа от первоначального клика.
@@ -48,17 +52,10 @@ class HMI extends Component {
         function upHandler(e) {
             if (!e) e = window.event;
 
-            const elem = {
-                id: elementToDrag.id,
-                x: elementToDrag.offsetLeft,
-                y: elementToDrag.offsetTop,
-                img: elementToDrag.querySelector('img').src
-            };
-
             document.removeEventListener("mouseup", upHandler, true);
             document.removeEventListener("mousemove", moveHandler, true);
 
-            handleElementChange(elem);
+            handleElementChange(elementToDrag);
         }
 
         elementToDrag.ondragstart = function () {
@@ -84,11 +81,17 @@ class HMI extends Component {
         }
     }
 
-    handleElementChange(newElement) {
+    handleElementChange = (newElement) => {
+        const newElementLocal = {
+            id: newElement.id,
+            x: newElement.offsetLeft,
+            y: newElement.offsetTop,
+            img: newElement.querySelector('img').src
+        };
 
         let tmpElement = this.state.elements.slice();
         const newElem = tmpElement.map(item => {
-            return (newElement.id == item.id) ? newElement : item;
+            return (newElementLocal.id == item.id) ? newElementLocal : item;
         });
         this.setState({elements: newElem});
     }
@@ -97,25 +100,25 @@ class HMI extends Component {
         this._updateLocalStorage();
     };
 
-    handleChange = (event) => {
-        this.setState({cannotChange: !this.state.cannotChange})
+    allowEditingHandler = (event) => {
+        console.log(event);
+        this.setState({cannotChange: event})
     };
+
+    onChangeHandler = (item) => {
+        console.log('item');
+        console.log(item.querySelector('img').src);
+
+        this.handleElementChange(item);
+    }
 
     render() {
         return (
             <div className="HMI">
-                <Layout>
-                    <Header title="Меню">
-                        <Navigation>
-                            <a href="#1">Link</a>
-                            <a href="#2">Link</a>
-                            <a href="#3">Link</a>
-                            <a href="#4">Link</a>
-                        </Navigation>
-                    </Header>
-                    <MainMenu cannotChange={this.state.cannotChange} inHandleChange={this.handleChange}
-                              addElemetnHandler={this.addElemetnHandler}/>
-                    <Content>
+                <AppBar
+                    allowEditingHandler={this.allowEditingHandler}
+                    cannotChange={this.state.cannotChange}
+                />
                         <div className="page-content">
                             {
                                 this.state.elements.map(element => {
@@ -125,13 +128,41 @@ class HMI extends Component {
                                             onMouseDownHandler={this.mousedownHandler}
                                             cannotChange={this.state.cannotChange}
                                             key={element.id}
-                                            stat={element}/>
+                                            stat={element}
+                                            onChangeHandler={this.onChangeHandler}
+                                        />
                                     )
                                 })
                             }
                         </div>
-                    </Content>
-                </Layout>
+                        { this.state.cannotChange &&
+                            <div>
+                                <Transition
+                                    component={false}
+                                    measure={false}
+                                    enter={{
+                                        opacity: 1,
+                                        scale: 1,
+                                        rotate: 0
+                                    }}
+                                    leave={{
+                                        opacity: 0,
+                                        scale: 0,
+                                        rotate: 360
+                                    }}
+                                >
+                            <Button
+                                fab
+                                raised
+                                color='primary'
+                                style={{position: 'fixed', bottom: 50, right: 50}}
+                                onClick={this.addElemetnHandler}
+                            >
+                                <AddIcon />
+                            </Button>
+                                </Transition>
+                            </div>
+                        }
             </div>
         );
     }
