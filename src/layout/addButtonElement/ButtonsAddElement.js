@@ -14,7 +14,7 @@ class ButtonsAddElement extends Component {
                         translateY: 0,
                         scale: 0.2,
                         rotate: 360,
-                        
+
 
                     }}
                     enter={{
