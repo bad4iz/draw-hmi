@@ -144,7 +144,7 @@ class HMI extends Component {
                 </div>
                 { this.state.cannotChange &&
                 <div>
-                    {this.state.visibleAddButtonElement ? <ButtonsAddElement /> : ''}
+                    {this.state.visibleAddButtonElement ? <ButtonsAddElement addElementHandler={this.addElementHandler}/> : ''}
 
                     <Transition
                         component={false} // don't use a wrapping component
