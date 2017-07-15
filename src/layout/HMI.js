@@ -9,7 +9,7 @@ import CloseIcon from 'material-ui-icons/Close';
 import ButtonsAddElement from "./addButtonElement/ButtonsAddElement";
 
 import Transition from 'react-motion-ui-pack';
-import { spring } from 'react-motion';
+import {spring} from 'react-motion';
 
 class HMI extends Component {
 
@@ -148,14 +148,16 @@ class HMI extends Component {
 
                     <Transition
                         component={false} // don't use a wrapping component
-                        enter={{ opacity: 1,
-                                scale: 1,
-                                rotate: 0
+                        enter={{
+                            opacity: 1,
+                            scale: 1,
+                            rotate: 0
                         }}
-                        leave={{opacity: 0,
-                                translateY: 650,
-                                scale: 0,
-                                rotate: 360
+                        leave={{
+                            opacity: 0,
+                            translateY: 650,
+                            scale: 0,
+                            rotate: 360
                         }}
                     >
                         <Button
@@ -165,21 +167,33 @@ class HMI extends Component {
                             style={{position: 'fixed', bottom: 50, right: 50}}
                             onClick={this.addElementHandler}
                         >
-                            <Transition
-                                component={false} // don't use a wrapping component
-                                enter={{ opacity: 1,
-                                    scale: 1,
-                                    rotate: 0
-                                }}
-                                leave={{opacity: 0,
-                                    translateY: 650,
-                                    scale: 0,
-                                    rotate: 360
-                                }}
-                            >
-                            {this.state.visibleAddButtonElement ? <CloseIcon /> : <AddIcon/>}
 
-                            </Transition>
+                            { this.state.visibleAddButtonElement ? (
+                                <Transition
+                                    enter={{
+                                        rotate: 0
+                                    }}
+                                    leave={{
+                                        rotate: 180
+                                    }}
+                                >
+                                    <CloseIcon />
+
+                                </Transition>
+                            ) : (
+                                <Transition
+                                    enter={{
+                                        rotate: 180
+                                    }}
+                                    leave={{
+                                        rotate: 0
+                                    }}
+                                >
+                                <AddIcon/>
+                                </Transition>
+
+                            )}
+
 
                         </Button>
                     </Transition>
