@@ -1,16 +1,22 @@
 import React, {Component} from 'react';
 import Element from "./Element";
 import AppBar from "./AppBar";
-import AddIcon from 'material-ui-icons/Add';
 import {Button} from "material-ui";
 
+// icon
+import AddIcon from 'material-ui-icons/Add';
+import CloseIcon from 'material-ui-icons/Close';
+import ButtonsAddElement from "./addButtonElement/ButtonsAddElement";
+
 import Transition from 'react-motion-ui-pack';
+import {spring} from 'react-motion';
 
 class HMI extends Component {
 
     state = {
         elements: [],
-        cannotChange: true
+        cannotChange: true,
+        visibleAddButtonElement: false
     };
 
     _updateLocalStorage = () => {
@@ -63,7 +69,8 @@ class HMI extends Component {
         };
     }
 
-    addElemetnHandler = () => {
+    addElementHandler = () => {
+        this.setState({visibleAddButtonElement: !this.state.visibleAddButtonElement})
         const newElements = this.state.elements.slice();
         const element = {
             id: Date.now(),
@@ -119,50 +126,79 @@ class HMI extends Component {
                     allowEditingHandler={this.allowEditingHandler}
                     cannotChange={this.state.cannotChange}
                 />
-                        <div className="page-content">
-                            {
-                                this.state.elements.map(element => {
-                                    return (
-                                        <Element
-                                            ref="theInput"
-                                            onMouseDownHandler={this.mousedownHandler}
-                                            cannotChange={this.state.cannotChange}
-                                            key={element.id}
-                                            stat={element}
-                                            onChangeHandler={this.onChangeHandler}
-                                        />
-                                    )
-                                })
-                            }
-                        </div>
-                        { this.state.cannotChange &&
-                            <div>
+                <div className="page-content">
+                    {
+                        this.state.elements.map(element => {
+                            return (
+                                <Element
+                                    ref="theInput"
+                                    onMouseDownHandler={this.mousedownHandler}
+                                    cannotChange={this.state.cannotChange}
+                                    key={element.id}
+                                    stat={element}
+                                    onChangeHandler={this.onChangeHandler}
+                                />
+                            )
+                        })
+                    }
+                </div>
+                { this.state.cannotChange &&
+                <div>
+                    {this.state.visibleAddButtonElement ? <ButtonsAddElement addElementHandler={this.addElementHandler}/> : ''}
+
+                    <Transition
+                        component={false} // don't use a wrapping component
+                        enter={{
+                            opacity: 1,
+                            scale: 1,
+                            rotate: 0
+                        }}
+                        leave={{
+                            opacity: 0,
+                            translateY: 650,
+                            scale: 0,
+                            rotate: 360
+                        }}
+                    >
+                        <Button
+                            fab
+                            raised
+                            color='primary'
+                            style={{position: 'fixed', bottom: 50, right: 50}}
+                            onClick={this.addElementHandler}
+                        >
+
+                            { this.state.visibleAddButtonElement ? (
                                 <Transition
-                                    component={false}
-                                    measure={false}
                                     enter={{
-                                        opacity: 1,
-                                        scale: 1,
                                         rotate: 0
                                     }}
                                     leave={{
-                                        opacity: 0,
-                                        scale: 0,
-                                        rotate: 360
+                                        rotate: 180
                                     }}
                                 >
-                            <Button
-                                fab
-                                raised
-                                color='primary'
-                                style={{position: 'fixed', bottom: 50, right: 50}}
-                                onClick={this.addElemetnHandler}
-                            >
-                                <AddIcon />
-                            </Button>
+                                    <CloseIcon />
+
                                 </Transition>
-                            </div>
-                        }
+                            ) : (
+                                <Transition
+                                    enter={{
+                                        rotate: 180
+                                    }}
+                                    leave={{
+                                        rotate: 0
+                                    }}
+                                >
+                                <AddIcon/>
+                                </Transition>
+
+                            )}
+
+
+                        </Button>
+                    </Transition>
+                </div>
+                }
             </div>
         );
     }
