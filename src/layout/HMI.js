@@ -148,8 +148,15 @@ class HMI extends Component {
 
                     <Transition
                         component={false} // don't use a wrapping component
-                        enter={{ opacity: 1, }}
-                        leave={{ opacity: 0, translateY: 650 }}
+                        enter={{ opacity: 1,
+                                scale: 1,
+                                rotate: 0
+                        }}
+                        leave={{opacity: 0,
+                                translateY: 650,
+                                scale: 0,
+                                rotate: 360
+                        }}
                     >
                         <Button
                             fab
@@ -158,8 +165,21 @@ class HMI extends Component {
                             style={{position: 'fixed', bottom: 50, right: 50}}
                             onClick={this.addElementHandler}
                         >
+                            <Transition
+                                component={false} // don't use a wrapping component
+                                enter={{ opacity: 1,
+                                    scale: 1,
+                                    rotate: 0
+                                }}
+                                leave={{opacity: 0,
+                                    translateY: 650,
+                                    scale: 0,
+                                    rotate: 360
+                                }}
+                            >
                             {this.state.visibleAddButtonElement ? <CloseIcon /> : <AddIcon/>}
 
+                            </Transition>
 
                         </Button>
                     </Transition>
