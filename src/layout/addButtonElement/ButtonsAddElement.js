@@ -10,13 +10,17 @@ class ButtonsAddElement extends Component {
         return (
             <div>
                 <Transition
-                    component={false} // don't use a wrapping component
-                    enter={{
-                        opacity: 1,
-                    }}
                     leave={{
-                        opacity: 0,
-                        translateY: 250
+                        translateY: 0,
+                        scale: 0.2,
+                        rotate: 360,
+                        
+
+                    }}
+                    enter={{
+                        scale: 1,
+                        rotate: 0
+
                     }}
                 >
                     <Button
@@ -27,15 +31,15 @@ class ButtonsAddElement extends Component {
                     >
                         <AddIcon/>
                     </Button>
+                    <Button
+                        fab
+                        raised
+                        color='primary'
+                        style={{position: 'fixed', bottom: 250, right: 50}}
+                    >
+                        <AddIcon/>
+                    </Button>
                 </Transition>
-                <Button
-                    fab
-                    raised
-                    color='primary'
-                    style={{position: 'fixed', bottom: 250, right: 50}}
-                >
-                    <AddIcon/>
-                </Button>
             </div>
         );
     }
