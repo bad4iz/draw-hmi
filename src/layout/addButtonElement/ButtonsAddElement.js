@@ -10,23 +10,15 @@ class ButtonsAddElement extends Component {
         return (
             <div>
                 <Transition
-
                     leave={{
-                        translateY: 0,
+                        translateY: 100,
                         scale: 0.2,
                         rotate: 360,
-
-                    }}
-                    onLeave={{
-                        translateY: 0,
-                        scale: 2,
-                        rotate: 360,
-
                     }}
                     enter={{
+                        translateY: 0,
                         scale: 0.7,
                         rotate: 0
-
                     }}
                 >
                     <Button
